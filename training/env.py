@@ -131,7 +131,7 @@ class RandomCircuits(gym.Env):
     def render(self, mode='human'):
         print(self.rend)
 
-
+'''
 if __name__ == "__main__":
     env = RandomCircuits(20, 20, 150, enc_type='feature')
     #print(env.observation_space, env.max_symbols)
@@ -146,6 +146,7 @@ if __name__ == "__main__":
             for i in range(5):
                 print("SHEET")
                 print(state[:,:,i])
+'''
 '''
 from random_circuit_env import RandomCircuits
 env = RandomCircuits(10, 10, 100, 100)
