@@ -29,6 +29,8 @@ number_of_qubits = number of qubits in the system
 current_params = the current weights of the circuit
 current_loss = the current loss of the model
 input_type = 0 for |0> state and 1 for equal superposition state
+Returns:
+The RL recommend parameters.
 '''
 def mixed(f, structure, number_of_qubits, current_params, current_loss, input_type):
     number_of_params = len(structure)
