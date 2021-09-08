@@ -2,7 +2,7 @@
 
 
 # Reinforcement Learning for Quantum Variational Circuit Optimization
-Code for Optimizing Quantum Variational Circuits with Deep Reinforcement Learning
+Code for [Optimizing Quantum Variational Circuits with Deep Reinforcement Learning](https://arxiv.org/abs/2109.03188)
 
 To use the pretrained models, don't worry about training or testing. Download deploy folder and use the `mixed` function in `augment.py` to work with your circuit. See the file for the required inputs. Note that deployment usage requires stable_baselines3 (which requires PyTorch) and numpy. 
 
