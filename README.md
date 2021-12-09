@@ -12,7 +12,7 @@ To train your own agent, go to the training folder. Specifiy the maximum sizes a
 
 # Examples for Deployment
 
-To be added soon. 
+The example (written in pennylane) is similar to that used to generate the barren plateaus figures in the paper. 
 
 # Questions?
 
