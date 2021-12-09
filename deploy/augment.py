@@ -21,6 +21,7 @@ def cnn_encoding(max_q, max_d, num_q, struct, weights, error, input_type):
         state[:,:,4] = error
     return state.transpose(2, 0, 1)
 
+
 '''
 Inputs:
 f = function that takes weights as input and returns the loss
@@ -29,18 +30,25 @@ number_of_qubits = number of qubits in the system
 current_params = the current weights of the circuit
 current_loss = the current loss of the model
 input_type = 0 for |0> state and 1 for equal superposition state
-Returns:
-The RL recommend parameters.
+ind = whether or not to use a single [ind]ividual example
 '''
-def mixed(f, structure, number_of_qubits, current_params, current_loss, input_type):
+def mixed(f, structure, number_of_qubits, current_params, current_loss, input_type, ind=False):
     number_of_params = len(structure)
     mlp_enc = mlp_encoding(400, number_of_qubits, len(structure) // number_of_qubits, structure, current_params, current_loss, input_type)
     cnn_enc = cnn_encoding(20, 20, number_of_qubits, structure, current_params, current_loss, input_type)
-    mlp_weights = np.array([sac_mlp_agent.predict(mlp_enc)[:number_of_params],])
-    cnn_weights = np.array([sac_cnn_agent.predict(cnn_enc)[:number_of_params],])
-    mlp_loss = f(mlp_weights)
-    cnn_loss = f(cnn_weights)
-    if mlp_loss < cnn_loss:
-        return mlp_weights
+    mlp_weights = np.array([sac_mlp_agent.predict(mlp_enc)[0][:number_of_params],])
+    cnn_weights = np.array([sac_cnn_agent.predict(cnn_enc)[0][:number_of_params],])
+    if ind:
+        mlp_loss = f(mlp_weights[0])
+        cnn_loss = f(cnn_weights[0])
+        if mlp_loss < cnn_loss:
+            return mlp_weights[0]
+        else:
+            return cnn_weights[0]
     else:
-        return cnn_weights
+        mlp_loss = f(mlp_weights)
+        cnn_loss = f(cnn_weights)
+        if mlp_loss < cnn_loss:
+            return mlp_weights
+        else:
+            return cnn_weights
